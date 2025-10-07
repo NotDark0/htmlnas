@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - HTML NAS Project</title>
+<style>
+  body {
+    background-color: #0d1117;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  /* === ANIMATED TITLE === */
+  .animated-title {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .animated-title span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeInOut 2.8s ease-in-out forwards;
+  }
+
+  @keyframes fadeInOut {
+    0%, 100% { opacity: 0; transform: translateY(-10px); }
+    10%, 80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(10px); }
+  }
+
+  /* === LOGIN BOX === */
+  .login-box {
+    background: #161b22;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  }
+
+  .login-box input {
+    display: block;
+    width: 250px;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    background-color: #21262d;
+    color: white;
+    font-size: 15px;
+  }
+
+  .login-box button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s;
+  }
+
+  .login-box button:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+
+  <div class="animated-title" id="animatedTitle"></div>
+
+  <div class="login-box">
+    <form action="/login" method="POST">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+<script>
+  const title = document.getElementById("animatedTitle");
+  const texts = ["thehtmlnasproject", "made by darktech"];
+  let current = 0;
+
+  function animateText(text) {
+    title.innerHTML = "";
+    for (let i = 0; i < text.length; i++) {
+      const span = document.createElement("span");
+      span.textContent = text[i];
+      span.style.animationDelay = `${i * 0.1}s`;
+      title.appendChild(span);
+    }
+
+    // Calculate exact total animation time (letters * 0.1s delay + 2.8s duration)
+    const totalTime = text.length * 100 + 2800;
+
+    // Switch to next text after the current one fully finishes
+    setTimeout(() => {
+      current = (current + 1) % texts.length;
+      animateText(texts[current]);
+    }, totalTime);
+  }
+
+  animateText(texts[current]);
+</script>
+
+</body>
+</html>

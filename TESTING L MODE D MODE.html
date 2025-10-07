@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dropdown (Click-to-Toggle)</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      margin: 40px;
+    }
+
+    .user-container {
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+      margin-right: 40px;
+    }
+
+    .username {
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .username:hover {
+      background: #f1f3f4;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: 120%;
+      right: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      min-width: 130px;
+      z-index: 10;
+    }
+
+    .dropdown.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown button {
+      background: #f8f9fa;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 10px;
+      text-align: left;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin: 4px 0;
+    }
+
+    .dropdown button:hover {
+      background: #e9ecef;
+    }
+
+    .logout {
+      background: #ff5f5f;
+      color: white;
+    }
+
+    .logout:hover {
+      background: #e63946;
+    }
+    .new-content-user-container {
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+      margin-right: 40px;
+    }
+
+    .new-content-username {
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .new-content-username:hover {
+      background: #f1f3f4;
+    }
+
+    .new-content-dropdown {
+      position: absolute;
+      top: 120%;
+      right: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      min-width: 130px;
+      z-index: 10;
+    }
+
+    .new-content-dropdown.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .new-content-dropdown button {
+      background: #f8f9fa;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 10px;
+      text-align: left;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin: 4px 0;
+    }
+
+    .new-content-dropdown button:hover {
+      background: #e9ecef;
+    }
+
+    .new-content-logout {
+      background: #ff5f5f;
+      color: white;
+    }
+
+    .new-content-logout:hover {
+      background: #e63946;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="user-container">
+    <div class="username" id="accountName">e</div>
+    <div class="dropdown" id="userDropdown">
+      <button class="logout" onclick="logout()">Logout</button>
+      <!-- Add more buttons here -->
+      <!-- <button>Profile</button> -->
+      <!-- <button>Settings</button> -->
+    </div>
+  </div>
+
+  <script>
+    const username = document.getElementById('accountName');
+    const dropdown = document.getElementById('userDropdown');
+
+    // Toggle dropdown when username is clicked
+    username.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent the click from bubbling to the document
+      dropdown.classList.toggle('show');
+    });
+
+    // Close dropdown when clicking anywhere else
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target) && !username.contains(e.target)) {
+        dropdown.classList.remove('show');
+      }
+    });
+
+    function logout() {
+      alert("Logged out!");
+      // Replace with your actual logout logic
+      dropdown.classList.remove('show');
+    }
+  </script>
+
+</body>
+</html>
